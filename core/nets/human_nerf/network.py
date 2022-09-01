@@ -14,6 +14,7 @@ from configs import cfg
 
 
 class Network(nn.Module):
+    # 基本上就是调用函数，初始化网络
     def __init__(self):
         super(Network, self).__init__()
 
@@ -78,6 +79,7 @@ class Network(nn.Module):
                 mlp_depth=cfg.pose_decoder.mlp_depth)
     
 
+    # 将 mlps 部署到辅助 gpus
     def deploy_mlps_to_secondary_gpus(self):
         self.cnl_mlp = self.cnl_mlp.to(cfg.secondary_gpus[0])
         if self.non_rigid_mlp:
